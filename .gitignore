@@ -1,0 +1,3 @@
+venv/
+fsite/__pycache__
+*py[co]

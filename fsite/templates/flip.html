@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Flip page{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block content %}
+{% if path %}
+<img src="{{ user_image }}" alt="TXT" width="60%" >
+<div class="buttons">
+    <a href="{{ url_for('rotate_left_img') }}">Turn left</a>
+    <a href="{{ url_for('delete_img') }}">Delete</a>
+    <a href="{{ url_for('rotate_right_img') }}">Turn right</a>
+</div>
+{% else %}
+<h1>No image</h1>
+{% endif %}
+
+{% endblock %}

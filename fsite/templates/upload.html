@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Upload page{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block content %}
+{% with messages = get_flashed_messages() %}
+{% for msg in messages %}
+<div><h2>{{ msg }}</h2></div>
+{% endfor %}
+{% endwith %}
+<div>
+    <form method="post", enctype="multipart/form-data">
+        <input type="file" name="up_image" accept="image/*">
+        <button type="submit">Upload</button>
+    </form>
+</div>
+{% endblock %}
