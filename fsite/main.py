@@ -6,25 +6,22 @@ from werkzeug.utils import secure_filename
 UPLOAD_FOLDER = 'static/upload/'
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'orehgldgdlkgjdlghdlhhthjbdlld'
+app.config['SECRET_KEY'] = 'orehgldgd39432lkgjdlghdl4355844bdlld'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 def delete():
-    for img in os.listdir(UPLOAD_FOLDER):
-        imgpath = os.path.join(UPLOAD_FOLDER, img)
-        os.remove(imgpath)
+    img = os.listdir(UPLOAD_FOLDER)[0]
+    imgpath = os.path.join(UPLOAD_FOLDER, img)
+    os.remove(imgpath)
 
 
 def rotate(angle):
-    for img in os.listdir(UPLOAD_FOLDER):
-        imgpath = os.path.join(UPLOAD_FOLDER, img)
+    img = os.listdir(UPLOAD_FOLDER)[0]
+    imgpath = os.path.join(UPLOAD_FOLDER, img)
     im = Image.open(imgpath)
-    im_rot = im.rotate(angle, expand=True)
+    im_rot = im.rotate(int(angle), expand=True)
     im_rot.save(imgpath)
-
-
-
 
 
 
@@ -40,8 +37,8 @@ def download():
 
 @app.route('/download_img')
 def download_img():
-    for img in os.listdir(UPLOAD_FOLDER):
-        imgpath = os.path.join(UPLOAD_FOLDER, img)
+    img = os.listdir(UPLOAD_FOLDER)[0]
+    imgpath = os.path.join(UPLOAD_FOLDER, img)
     return send_file(imgpath, as_attachment=True)
 
 
@@ -51,16 +48,15 @@ def delete_img():
     return redirect(url_for('home'))
 
 
-@app.route('/rotate_left')
-def rotate_left_img():
-    rotate(90)
-    return redirect(url_for('flip'))
+# @app.route('/rotate_left')
+# def rotate_left_img():
+#     rotate(90)
+#     return redirect(url_for('flip'))
 
 
-
-@app.route('/rotate_right')
-def rotate_right_img():
-    rotate(-90)
+@app.route('/rotate/<string:angle>')
+def rotate_img(angle):
+    rotate(angle)
     return redirect(url_for('flip'))
 
 
@@ -68,7 +64,7 @@ def rotate_right_img():
 def flip():
     img_file_path = session.get('uploaded_img_path', None)
     path = os.listdir(UPLOAD_FOLDER)
-    return render_template('flip.html', user_image = img_file_path, path=path)
+    return render_template('flip.html', user_image=img_file_path, path=path)
 
 
 @app.route('/upload', methods=['GET', 'POST'])
@@ -79,14 +75,15 @@ def upload():
                 flash('No file part')
                 return redirect(request.url)
             img = request.files['up_image']
-        
+
             if img.filename == '':
                 flash('No selected file')
                 return redirect(request.url)
-        
+
             filename = secure_filename(img.filename)
             img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            session['uploaded_img_path'] = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            session['uploaded_img_path'] = os.path.join(
+                app.config['UPLOAD_FOLDER'], filename)
             return redirect(url_for('download'))
         else:
             flash('Delete the old file first')
@@ -94,4 +91,4 @@ def upload():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)

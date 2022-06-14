@@ -1,0 +1,39 @@
+
+
+.error_msg{
+    background-color: #da2a2a;
+    padding: 15px 30px;
+    margin: 20px 0;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.img_input{
+    width: 50%;
+    margin: auto;
+}
+
+.upload_button{
+    width: 50%;
+    padding: 10px 20px;
+    font-size: 18px;
+    color: bisque;
+    background-color: #05a72ecc;
+    margin: 20px;
+    border: none;
+    border-radius: 10px;
+}
+
+.upload_button:hover{
+    background-color: #10862dcc;
+}
+
+.xmark{
+    text-decoration: none;
+    color: #fff;
+    float: right;
+}
+
+.xmark:hover{
+    color: #cacaca;
+}

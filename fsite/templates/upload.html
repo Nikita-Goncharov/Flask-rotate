@@ -2,18 +2,20 @@
 
 {% block title %}Upload page{% endblock %}
 
-{% block head %}{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/upload.css') }}">
+{% endblock %}
 
 {% block content %}
 {% with messages = get_flashed_messages() %}
 {% for msg in messages %}
-<div><h2>{{ msg }}</h2></div>
+<div class="error_msg"><h2>{{ msg }}<a class="xmark" href="{{ url_for('upload') }}"><i class="fa-solid fa-xmark"></i></a></h2></div>
 {% endfor %}
 {% endwith %}
 <div>
     <form method="post", enctype="multipart/form-data">
-        <input type="file" name="up_image" accept="image/*">
-        <button type="submit">Upload</button>
+        <input type="file" class="form-control img_input" name="up_image" accept="image/*">
+        <button type="submit" class="upload_button">Upload</button>
     </form>
 </div>
 {% endblock %}

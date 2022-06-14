@@ -2,15 +2,17 @@
 
 {% block title %}Flip page{% endblock %}
 
-{% block head %}{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/rotate.css') }}">
+{% endblock %}
 
 {% block content %}
 {% if path %}
-<img src="{{ user_image }}" alt="TXT" width="60%" >
+<img src="{{ user_image }}" alt="TXT" height="400px" width="auto" >
 <div class="buttons">
-    <a href="{{ url_for('rotate_left_img') }}">Turn left</a>
+    <a href="{{ url_for('rotate_img', angle='90') }}">Turn left</a>
     <a href="{{ url_for('delete_img') }}">Delete</a>
-    <a href="{{ url_for('rotate_right_img') }}">Turn right</a>
+    <a href="{{ url_for('rotate_img', angle='-90') }}">Turn right</a>
 </div>
 {% else %}
 <h1>No image</h1>

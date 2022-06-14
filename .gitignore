@@ -1,3 +1,5 @@
 venv/
+fsite/static/upload/*
 fsite/__pycache__
 *py[co]
+
