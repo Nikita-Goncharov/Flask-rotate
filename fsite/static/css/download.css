@@ -1,0 +1,19 @@
+.menu_img{
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+    padding: 10px 20px;
+    background-color: coral;
+    border: 1px solid #000;
+    border-radius: 5px;
+    margin: 20px;
+}
+
+.menu_img:hover{
+    color: #1E1E1E;
+    background-color: #d35a2e;
+}
+
+.buttons{
+    margin: 30px;
+}

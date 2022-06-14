@@ -27,5 +27,6 @@ body,
 
 
 .nav-pills a:hover{
-    color: #009c7a;
+    color: #3f3f3f;
+    text-decoration: underline;
 }

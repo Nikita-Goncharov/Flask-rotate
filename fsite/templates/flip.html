@@ -10,9 +10,9 @@
 {% if path %}
 <img src="{{ user_image }}" alt="TXT" height="400px" width="auto" >
 <div class="buttons">
-    <a href="{{ url_for('rotate_img', angle='90') }}">Turn left</a>
-    <a href="{{ url_for('delete_img') }}">Delete</a>
-    <a href="{{ url_for('rotate_img', angle='-90') }}">Turn right</a>
+    <a class="menu_img" href="{{ url_for('rotate_img', angle='90') }}">Turn left</a>
+    <a class="menu_img" href="{{ url_for('delete_img') }}">Delete</a>
+    <a class="menu_img" href="{{ url_for('rotate_img', angle='-90') }}">Turn right</a>
 </div>
 {% else %}
 <h1>No image</h1>
