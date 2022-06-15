@@ -1,0 +1,27 @@
+
+html,
+body,
+.wrapper {
+    height: 200vh;
+}
+
+.head-div{
+    padding: 15px 25px;
+    background-color: cornflowerblue;
+}
+
+.con{
+    width: 49%;
+    padding: 15px 20px;
+    margin: 20px 0;
+}
+
+.left-div{
+    float: left;
+    background-color: indianred;
+}
+
+.right-div{
+    float: right;
+    background-color: aqua;
+}

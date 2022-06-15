@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-{% if path %}
+{% if user_image %}
 <img src="{{ user_image }}" alt="TXT" height="400px" width="auto" >
 <div class="buttons">
     <a class="menu_img" href="{{ url_for('rotate_img', angle='90') }}">Turn left</a>

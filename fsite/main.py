@@ -6,13 +6,16 @@ from werkzeug.utils import secure_filename
 UPLOAD_FOLDER = 'static/upload/'
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'orehgldgd39432lkgjdlghdl4355844bdlld'
+app.config['SECRET_KEY'] = 'orehgldgd39432lkgjdlghdl4355844bd2435'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 def img_path():
-    img = os.listdir(UPLOAD_FOLDER)[0]
-    imgpath = os.path.join(UPLOAD_FOLDER, img)
+    try:
+        img = os.listdir(UPLOAD_FOLDER)[0]
+        imgpath = os.path.join(UPLOAD_FOLDER, img)
+    except:
+        return None
     return imgpath
 
 
@@ -33,10 +36,8 @@ def home():
 
 
 @app.route('/download')
-def download():
-    img_file_path = session.get('uploaded_img_path', None)
-    path = os.listdir(UPLOAD_FOLDER)
-    return render_template('download.html', user_image=img_file_path, path=path)
+def downloadpage():
+    return render_template('download.html', user_image=img_path())
 
 
 @app.route('/download_img')
@@ -47,7 +48,7 @@ def download_img():
 @app.route('/del')
 def delete_img():
     delete()
-    return redirect(url_for('home'))
+    return redirect(url_for('upload'))
 
 
 @app.route('/rotate/<string:angle>')
@@ -58,9 +59,7 @@ def rotate_img(angle):
 
 @app.route('/flip')
 def flip():
-    img_file_path = session.get('uploaded_img_path', None)
-    path = os.listdir(UPLOAD_FOLDER)
-    return render_template('flip.html', user_image=img_file_path, path=path)
+    return render_template('flip.html', user_image=img_path())
 
 
 @app.route('/upload', methods=['GET', 'POST'])
@@ -78,8 +77,6 @@ def upload():
 
             filename = secure_filename(img.filename)
             img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            session['uploaded_img_path'] = os.path.join(
-                app.config['UPLOAD_FOLDER'], filename)
             return redirect(url_for('flip'))
         else:
             flash('Delete the old file first')
@@ -87,4 +84,4 @@ def upload():
 
 
 if __name__ == '__main__':
-    app.run(debug=True) # host='0.0.0.0', port=5000,
+    app.run(host='0.0.0.0', port=5000, debug=True)
